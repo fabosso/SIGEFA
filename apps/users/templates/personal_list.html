@@ -1,0 +1,12 @@
+{% for personal in personal_list %}
+   <tr>
+      <td>{{ personal.first_name }}</td>
+      <td>{{ personal.last_name }}</td>
+      <td>{{ personal.rol }}</td>
+      <td>{{ personal.grado }}</td>
+   </tr>
+{% empty %}
+   <tr>
+      <td colspan="7" class="text-center bg-secundary">Ningun Personal añadido</td>
+   </tr>
+{% endfor %}

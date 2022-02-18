@@ -1,0 +1,71 @@
+{% extends 'base_content.html' %}
+
+{% block module_content %}
+
+    <div class="col-lg-12 mb-2" style="text-align: center;">
+        <h2>{{ facilidad_name }}</h2>
+    </div>
+    <div class="col-lg-3 col-6">
+        <p class="d-none" id="id_facilidad">{{ facilidad_id }}</p>
+        <div class="small-box dashboard-box bg-info">
+            <div class="inner">
+                <h3>Vehiculo</h3>
+                <p>{{ vehiculo.nombre_vehiculo }}</p>
+                <p>{{ vehiculo.marca_vehiculo }}</p>
+                <p>{{ vehiculo.modelo_vehiculo }}</p>
+                <p>NI</p>
+                <p>{{ vehiculo.cant_combustible_vehiculo }}</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-car"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box dashboard-box bg-success">
+            <div class="inner">
+                <h3>Equipos</h3>
+                {% for eqcom in eqcom_list %}
+                    <p>Equipo {{ forloop.counter }} {{ eqcom.nombre }}</p>
+                {% endfor %}
+            </div>
+            <div class="icon">
+                <i class="fas fa-hdd"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box dashboard-box bg-warning">
+            <div class="inner">
+                <h3>Gpo Electr</h3>
+                <p>{{ gpoelectr.nombre_gpo_elect }}</p>
+                <p>{{ gpoelectr.marca_gpo_elect }}</p>
+                <p>{{ gpoelectr.modelo_gpo_elect }}</p>
+                <p>{{ gpoelectr.cant_combustible_gpo_elect }}</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-layer-group"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <form action="." method="POST" id="CombustForm">
+            <div class="form-group mb-5">
+                <label for="customRange1">{{ comb_vehiculo_form.cant_combustible_vehiculo.label }}</label>
+                <span class="cant-combus-span vehiculoCantCombus{{ vehiculo.id }}">{{ vehiculo.cant_combustible_vehiculo }}</span>
+                {{ comb_vehiculo_form.cant_combustible_vehiculo }}
+            </div>
+            <div class="form-group mt-5">
+                <label for="customRange1">{{ comb_gpoelect_form.cant_combustible_gpo_elect.label }}</label>
+                <span class="cant-combus-span gpoElectCantCombus{{ gpoelectr.id }}">{{ gpoelectr.cant_combustible_gpo_elect }}</span>
+                {{ comb_gpoelect_form.cant_combustible_gpo_elect }}
+            </div>
+        </form>
+    </div>
+    <script>
+        var section = "{{ section }}"
+    </script>
+{% endblock module_content %}
+
+{% block extra_javascript %}
+{% endblock extra_javascript %}

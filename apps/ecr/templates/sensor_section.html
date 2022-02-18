@@ -1,0 +1,86 @@
+{% extends 'base_content.html' %}
+{% load static %}
+
+{% block content %}
+   {% include 'navbar.html' %}
+   {% include 'sidebar.html' %}
+   <body class="hold-transition sidebar-mini layout-fixed">
+      <div class="wrapper dashboard-wrapper">
+         <div class="content-wrapper" style="padding-top: 2rem; margin-bottom: 9rem;">
+            <section class="content">
+               <div class="container-fluid">
+                  <div class="row" style="justify-content: center;">
+                     <div class="col-lg-6 col-sensor">
+                        <div class="card card-success">
+                           <div class="card-header">
+                              <h3 class="card-title">Sensor <i class="nav-icon fas fa-hdd"></i></h3>
+                           </div>
+                                 <div class="card-body card-body-form">
+
+                                    <form action="." method="POST" id="sensorForm">
+                                       <div class="row justify-content-center text-center">
+                                          <div class="col-md-6 mb-3">
+                                             <label for="">{{form.nombre.label }}:</label>
+                                             {{ form.nombre }}
+                                          </div>
+                                       </div>
+                                       <div class="row justify-content-center text-center">
+                                          <div class="col-md-6 mb-5">
+                                             <label for="">Valor: </label>
+                                             {{ form.indicador }}
+                                          </div>
+                                       </div>
+                                       <div class="row justify-content-center text-center">
+                                          <div class="col-md-4">
+                                             <button type="button" class="btn btn-success add-sensor">Añadir <i class="fas fa-plus"></i></button>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                           <p class="d-none" id="id_facilidad">{{ facilidad_id }}</p>
+
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </section>
+         </div>
+      </div>
+
+      <!-- <form action="." method="POST" class="d-none clone" id="sensorForm">
+         <div class="row justify-content-center text-center">
+            <div class="col-md-6 mb-3" style="margin-left: 20%;">
+               <div class="form-control skeleton skeleton-label-header"></div>
+               <div class="form-control skeleton skeleton-label"></div>
+            </div>
+         </div> -->
+      <!-- </form> -->
+
+         <div class="row justify-content-center text-center d-none clone">
+            <div class="col-md-6 mb-3">
+               <div class="form-control skeleton skeleton-label-header"></div>
+               <div class="form-control skeleton skeleton-label"></div>
+            </div>
+         </div>
+
+      <script>
+         var section = "{{ section }}"
+         var sensor_created = "{{ sensor_created }}"
+         var sensor_id = "{{ sensor_id }}"
+      </script>
+   
+      <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+      <!-- jQuery UI 1.11.4 -->
+      <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+      <!-- Sweat Alert JS-->
+      <script src="{% static 'plugins/sweetalert2-9.10.0/sweetalert2.min.js' %}"></script>
+      <script src="{% static 'js/apps/sensor.js' %}"></script>
+
+   </body>
+
+
+{% endblock content %}
+
+
+

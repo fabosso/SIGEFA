@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<body class="login-body">
+   <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+         <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+               <h5 class="text-center mb-2 fw-light fs-5 font-weight-bold">Seleccione la actividad a realizar</h5>
+                  <div class="p-4">
+                     <form action="." method="POST" id="actionChoiceForm">
+                        {% csrf_token %}
+                        <div class="form-group mb-5">
+                           {% for value, name in form.fields.ecr_action_options.choices %}
+                              <div class="form-check mb-2">
+                                 <input class="form-check-input" type="radio" id="ecr_action_options" value="{{ value }}" name="ecr_action_options">
+                                 <label class="form-check-label">{{ name }}</label>
+                              </div>
+                           {% endfor %}
+                           {{ form.ecr_action_options.errors }}
+                        </div>
+                           <div class="btn-wrapper text-center d-flex justify-content-between">
+                              <a href="{% url 'logout' %}" class="btn btn-primary btn-sm options-forms-buttons">Salir</a> 
+                              <button class="btn btn-primary btn-sm options-forms-buttons" type="submit">Continuar</button>
+                           </div>
+                     </form>
+
+
+                  </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+{% endblock content %}

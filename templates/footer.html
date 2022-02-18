@@ -1,0 +1,56 @@
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+
+    <form action="." method="POST" id="EventosForm">
+      {% csrf_token %}
+      <input type="hidden" name="id_facilidad_obj" value="{{ facilidad_id }}">
+      <div class="row" style="margin-left: 2rem;">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>{{ eventos_form.tipo.label }}</label>
+                  {{ eventos_form.tipo }}
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>{{ eventos_form.subtipo.label }}</label>
+                  {{ eventos_form.subtipo }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="form-group">
+                <label>{{ eventos_form.description.label  }}</label>
+                  {{ eventos_form.description }}
+              </div>
+            </div>
+            <div class="col-sm-2 event-button">
+              <button type="submit" class="btn btn-success post-evento-button">Asentar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="btn-group-vertical status-list-group" role="group" style="width: 65%;" aria-label="Button group with nested dropdown">
+              <button type="button" name="S" class="btn {% if facilidad_status == 'S' %}btn-success{% else %}btn-secondary{% endif %} btn-group-lg status-btn"><i class="fas fa-check"></i> En servicio</button>
+              <button type="button" name="L" class="btn {% if facilidad_status == 'L' %}btn-warning{% else %}btn-secondary{% endif %} btn-group-lg status-btn"><i class="fas fa-exclamation-circle"></i> Limitado</button>
+              <button type="button" name="F" class="btn {% if facilidad_status == 'F' %}btn-danger{% else %}btn-secondary{% endif %} btn-group-lg status-btn"><i class="fas fa-times"></i> F/S</button>
+            </div>
+        </div>
+      </div>
+    </form>
+
+
+ </footer>
+
+ <!-- Control Sidebar -->
+ <aside class="control-sidebar control-sidebar-dark">
+   <!-- Control sidebar content goes here -->
+ </aside>
+ <!-- /.control-sidebar -->
+
+<script type="text/javascript">
+  var url_search_type = "{% url 'ecr:search_subtipo' %}";
+</script>

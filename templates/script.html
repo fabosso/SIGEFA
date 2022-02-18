@@ -1,0 +1,36 @@
+{% load static %}
+
+
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'js/adminlte.js' %}"></script>
+<!-- Select2 Js -->
+<script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'plugins/select2/js/i18n/es.js' %}"></script>
+<!-- Jquery Confirm -->
+<script src="{% static 'plugins/jquery-confirm-v3.3.4/jquery-confirm.min.js' %}"></script>
+<!-- Sweat Alert JS-->
+<script src="{% static 'plugins/sweetalert2-9.10.0/sweetalert2.min.js' %}"></script>
+
+{% block extra_javascript %}
+   <script src="{% static 'js/apps/ecr/logistica.js' %}"></script>
+   <script src="{% static 'js/apps/ecr/eventos_form.js' %}"></script>
+   <script>
+
+      $(document).ready(function(){
+         var userFirstName = "{{ request.user.first_name }}"
+         var userLastName = "{{ request.user.last_name }}"
+
+         var intials = userFirstName.charAt(0) + userLastName.charAt(0)
+         var profileImage = $('#profileImage').text(intials);
+      });
+
+   </script>
+{% endblock extra_javascript %}
+

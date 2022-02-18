@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <body class="login-body">
+      <div class="row">
+         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+               <div class="card-body p-4 p-sm-5">
+               <div class="row back-icon-registration">
+                  <a href="{% url 'users:login' %}"><i class="fas fa-arrow-circle-left fa-3x"></i></a>
+               </div>
+               <h5 class="text-center mb-5 fw-light fs-5">Sign In</h5>
+               <form style="text-align: center;" action="." method="POST">
+                  {% csrf_token %}
+
+                  <div class="row">
+                     <div class="col-md-6 mb-5">
+                        <label for="first_name">Nombre de Usuario</label>
+                        <input type="username" name="username" class="form-control" required id="id_username" placeholder="Nombre de Usuario">
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6 mb-5">
+                        <label for="first_name">Nombre</label>
+                        <input type="text" name="first_name" class="form-control" required id="id_first_name" placeholder="Nombre">
+                     </div>
+                     <div class="col-md-6 mb-5">
+                     <label for="last_name">Apellido</label>
+                        <input type="text" name="last_name" class="form-control" required id="id_last_name" placeholder="Apellido">
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6 mb-5">
+                        <label for="id_grado">Grado</label>
+                        {{ form.grado }}
+                     </div>
+                     <div class="col-md-6 mb-5">
+                        <label for="id_rol">Rol</label>
+                        {{ form.rol }}
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6 mb-2">
+                        <input type="password" name="password1" class="form-control" required id="id_password1" required placeholder="Contraseña">
+                        <span class="helptext"></span>
+                     </div>
+                     <div class="col-md-6 mb-2">
+                        <input type="password" name="password2" class="form-control" required id="id_password2" placeholder="Confirmar Contraseña">
+                     </div>
+                  </div>
+
+                  <div class="d-grid mt-3">
+                     <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Registrar</button>
+                  </div>
+               </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+{% endblock content %}
