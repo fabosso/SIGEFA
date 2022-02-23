@@ -136,3 +136,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+#os.environ['HTTPS'] = "on"
+#CSRF_COOKIE_SECURE = True
+#CSRF_COOKIE_SAMESITE = 'Strict'
+#SESSION_COOKIE_SECURE = True
