@@ -1,174 +1,202 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-
-{% block content %}
 <body class="login-body">
-   <div class="row">
-      <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
-         <div class="card border-0 shadow rounded-3 my-5">
-
-            <div class="card-body p-4 p-sm-5">
-               <div class="row back-icon">
-                  <a href="{% url 'ecr:ecr_action_option' %}"><i class="fas fa-arrow-circle-left fa-3x"></i></a>
-               </div>
-               <h5 class="text-center mb-2 fw-light fs-5 font-weight-bold">Configuracion Inicial</h5>
-                  <div class="p-4">
-                           <div class="row" style="justify-content: center;">
-                              <form action="." method="POST" id="ConfInitForm">
-                                 {% csrf_token %}
-                                 <!-- Start Comunicaciones Form -->
-                                 <div class="col-md-12">
-                                       <div class="card card-primary">
-                                          <div class="card-header">
-                                             <h3 class="card-title">Comunicaciones</h3>
-                                           </div>
-                                          <div class="card-body">
-                                             <div class="row">
-                                                <div class="col-6">
-                                                   <div class="form-group">
-                                                      {% for value, name in form.fields.comunicaciones_options.choices %}
-                                                         <div class="form-check">
-                                                            <input class="form-check-input" id="{{ name }}{{ forloop.counter }}" type="radio" value="{{ value }}" name="comunicaciones_options">
-                                                            <label class="form-check-label" for="{{ name }}">{{ name }}</label>
-                                                         </div>
-                                                      {% endfor %}
-                                                   </div>
-                                                </div>
-                                                   <div class="hideable-select-form1 col-6">
-                                                      {{ form.comunicaciones_ecr }} 
-                                                   </div>
-                                                   <div class="hideable-select-form2 col-6">
-                                                      {{ form.comunicaciones_corresp }} 
-                                                   </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                 </div>
-                                 <!-- End Comunicaciones Form -->
-                                 <!-- Start Logistica Form -->
-                                 <div class="col-md-12">
-                                    <div class="card card-warning">
-                                       <div class="card-header">
-                                          <h3 class="card-title">Logistica</h3>
-                                        </div>
-                                       <div class="card-body">
-                                          {{ formset.management_form }}
-                                          {% for form in formset %}
-                                             <div class="row form-row">
-                                                <div class="col-4">
-                                                   <label id="InputLabel">{{ form.nombre.label }}</label>
-                                                </div>
-                                                <div class="col-8">
-                                                   <div class="input-group ">
-                                                      {{ form.nombre }}
-                                                      <div class="input-group-append mb-2">
-                                                         <button type="button" class="btn btn-success add-form-row"><i class="fas fa-plus"></i></button>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          {% endfor %}
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- End Logistica Form -->
-                                 <!-- Start Vehiculo Form -->
-                                 <div class="col-md-12">
-                                    <div class="card card-secondary">
-                                       <div class="card-header">
-                                          <h3 class="card-title">Vehiculo</h3>
-                                        </div>
-                                       <div class="card-body">
-                                          <div class="row">
-                                             <div class="col-6 mt-4">
-                                                <label>{{vehiculo_form.nombre_vehiculo.label}}</label>
-                                                <div class="input-group ">
-                                                   {{ vehiculo_form.nombre_vehiculo }}
-                                                </div>
-                                             </div>
-                                             <div class="col-3">
-                                                <label>{{vehiculo_form.cant_combustible_vehiculo.label}}</label>
-                                               {{ vehiculo_form.cant_combustible_vehiculo }}
-                                             </div>
-                                             <div class="col-3">
-                                                <label>{{vehiculo_form.cap_combustible_vehiculo.label}}</label>
-                                               {{ vehiculo_form.cap_combustible_vehiculo }}
-                                             </div>
-                                           </div>
-                                           <div class="row">
-                                             <div class="col-4 mt-4">
-                                                <label>{{vehiculo_form.marca_vehiculo.label}}</label>
-                                               {{ vehiculo_form.marca_vehiculo }}
-                                             </div>
-                                             <div class="col-4 mt-4">
-                                                <label>{{vehiculo_form.modelo_vehiculo.label}}</label>
-                                               {{ vehiculo_form.modelo_vehiculo }}
-                                             </div>
-                                           </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- End Vehiculo Form -->
-                                 <!-- Start GrpoElect Form -->
-                                 <div class="col-md-12">
-                                    <div class="card card-secondary">
-                                       <div class="card-header">
-                                          <h3 class="card-title">Gpo Elect</h3>
-                                          </div>
-                                       <div class="card-body">
-                                          <div class="row">
-                                             <div class="col-6 mt-4">
-                                                <label>{{gpo_electform.nombre_gpo_elect.label}}</label>
-                                                <div class="input-group ">
-                                                   {{ gpo_electform.nombre_gpo_elect }}
-                                                </div>
-                                             </div>
-                                             <div class="col-3">
-                                                <label>{{ gpo_electform.cant_combustible_gpo_elect.label }}</label>
-                                                {{ gpo_electform.cant_combustible_gpo_elect }}
-                                             </div>
-                                             <div class="col-3">
-                                                <label>{{ gpo_electform.cap_combustible_gpo_elect.label }}</label>
-                                                {{ gpo_electform.cap_combustible_gpo_elect }}
-                                             </div>
-                                          </div>
-                                          <div class="row">
-                                             <div class="col-4 mt-4">
-                                                <label>{{gpo_electform.marca_gpo_elect.label}}</label>
-                                               {{ gpo_electform.marca_gpo_elect }}
-                                             </div>
-                                             <div class="col-4 mt-4">
-                                                <label>{{gpo_electform.modelo_gpo_elect.label}}</label>
-                                               {{ gpo_electform.modelo_gpo_elect }}
-                                             </div>
-                                           </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- End GrpoElect Form -->
-                                 <div class="d-grid mt-3 text-center">
-                                    <button class="btn btn-success btn-login text-uppercase fw-bold confInitButton" type="submit">Configurar</button>
-                                 </div>
-                                 <div class="row" id="hidden-spinner" >
-                                    <div class="spinner-border text-dark" role="status"></div>
-                                  </div>
-                              </form>
-                              </div>
-                           </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+      <div class="card border-0 shadow rounded-3 my-5">
+        <div class="card-body p-4 p-sm-5">
+          <div class="row back-icon">
+            <a href="{% url 'ecr:ecr_action_option' %}"
+              ><i class="fas fa-arrow-circle-left fa-3x"></i
+            ></a>
+          </div>
+          <h5 class="text-center mb-2 fw-light fs-5 font-weight-bold">
+            Configuracion Inicial
+          </h5>
+          <div class="p-4">
+            <div class="row" style="justify-content: center">
+              <form action="." method="POST" id="ConfInitForm">
+                {% csrf_token %}
+                <!-- Start Comunicaciones Form -->
+                <div class="col-md-12">
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Comunicaciones</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="form-group">
+                            {% for value, name in
+                            form.fields.comunicaciones_options.choices %}
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                id="{{ name }}{{ forloop.counter }}"
+                                type="radio"
+                                value="{{ value }}"
+                                name="comunicaciones_options"
+                              />
+                              <label class="form-check-label" for="{{ name }}"
+                                >{{ name }}</label
+                              >
+                            </div>
+                            {% endfor %}
+                          </div>
                         </div>
+                        <div class="hideable-select-form1 col-6">
+                          {{ form.comunicaciones_ecr }}
+                        </div>
+                        <div class="hideable-select-form2 col-6">
+                          {{ form.comunicaciones_corresp }}
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <!-- End Comunicaciones Form -->
+                <!-- Start Logistica Form -->
+                <div class="col-md-12">
+                  <div class="card card-warning">
+                    <div class="card-header">
+                      <h3 class="card-title">Logistica</h3>
+                    </div>
+                    <div class="card-body">
+                      {{ formset.management_form }} {% for form in formset %}
+                      <div class="row form-row">
+                        <div class="col-4">
+                          <label id="InputLabel">{{ form.nombre.label }}</label>
+                        </div>
+                        <div class="col-8">
+                          <div class="input-group">
+                            {{ form.nombre }}
+                            <div class="input-group-append mb-2">
+                              <button
+                                type="button"
+                                class="btn btn-success add-form-row"
+                              >
+                                <i class="fas fa-plus"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <!-- End Logistica Form -->
+                <!-- Start Vehiculo Form -->
+                <div class="col-md-12">
+                  <div class="card card-secondary">
+                    <div class="card-header">
+                      <h3 class="card-title">Vehiculo</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6 mt-4">
+                          <label>{{vehiculo_form.nombre_vehiculo.label}}</label>
+                          <div class="input-group">
+                            {{ vehiculo_form.nombre_vehiculo }}
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <label
+                            >{{vehiculo_form.cant_combustible_vehiculo.label}}</label
+                          >
+                          {{ vehiculo_form.cant_combustible_vehiculo }}
+                        </div>
+                        <div class="col-3">
+                          <label
+                            >{{vehiculo_form.cap_combustible_vehiculo.label}}</label
+                          >
+                          {{ vehiculo_form.cap_combustible_vehiculo }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4 mt-4">
+                          <label>{{vehiculo_form.marca_vehiculo.label}}</label>
+                          {{ vehiculo_form.marca_vehiculo }}
+                        </div>
+                        <div class="col-4 mt-4">
+                          <label>{{vehiculo_form.modelo_vehiculo.label}}</label>
+                          {{ vehiculo_form.modelo_vehiculo }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Vehiculo Form -->
+                <!-- Start GrpoElect Form -->
+                <div class="col-md-12">
+                  <div class="card card-secondary">
+                    <div class="card-header">
+                      <h3 class="card-title">Gpo Elect</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6 mt-4">
+                          <label
+                            >{{gpo_electform.nombre_gpo_elect.label}}</label
+                          >
+                          <div class="input-group">
+                            {{ gpo_electform.nombre_gpo_elect }}
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <label
+                            >{{ gpo_electform.cant_combustible_gpo_elect.label
+                            }}</label
+                          >
+                          {{ gpo_electform.cant_combustible_gpo_elect }}
+                        </div>
+                        <div class="col-3">
+                          <label
+                            >{{ gpo_electform.cap_combustible_gpo_elect.label
+                            }}</label
+                          >
+                          {{ gpo_electform.cap_combustible_gpo_elect }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4 mt-4">
+                          <label>{{gpo_electform.marca_gpo_elect.label}}</label>
+                          {{ gpo_electform.marca_gpo_elect }}
+                        </div>
+                        <div class="col-4 mt-4">
+                          <label
+                            >{{gpo_electform.modelo_gpo_elect.label}}</label
+                          >
+                          {{ gpo_electform.modelo_gpo_elect }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End GrpoElect Form -->
+                <div class="d-grid mt-3 text-center">
+                  <button
+                    class="btn btn-success btn-login text-uppercase fw-bold confInitButton"
+                    type="submit"
+                  >
+                    Configurar
+                  </button>
+                </div>
+                <div class="row" id="hidden-spinner">
+                  <div class="spinner-border text-dark" role="status"></div>
+                </div>
+              </form>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
-   </div>
-   <!-- jQuery -->
-   <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-   <!-- jQuery UI 1.11.4 -->
-   <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-   <script src="{% static 'js/apps/ecr/initial_conf.js' %}"></script>
+    </div>
+  </div>
+  <!-- jQuery -->
+  <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'js/apps/ecr/initial_conf.js' %}"></script>
 </body>
 
-
 {% endblock content %}
-

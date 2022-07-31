@@ -1,40 +1,51 @@
-{% load static %}  
-
-
+{% load static %}
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-<!-- Brand Logo -->
-<a href="#" class="brand-link">
-   <img src="{% static 'img/ejercito-logo-sol_de_mayo_128px.png' %}" alt="Ejército Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-   <span class="brand-text font-weight-light">SIGEFA</span>
-</a>
+  <!-- Brand Logo -->
+  <a href="#" class="brand-link">
+    <img
+      src="{% static 'img/ejercito-logo-sol_de_mayo_128px.png' %}"
+      alt="Ejército Logo"
+      class="brand-image img-circle elevation-3"
+      style="opacity: 0.8"
+    />
+    <span class="brand-text font-weight-light">SIGEFA</span>
+  </a>
 
-<!-- Sidebar -->
-<div class="sidebar">
-   <!-- Sidebar user panel (optional) -->
-   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-      <!-- <img src="{% static 'img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image"> -->
-         <div class="elevation-3" id="profileImage"></div>
+        <!-- <img src="{% static 'img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image"> -->
+        <div class="elevation-3" id="profileImage"></div>
       </div>
       <div class="info">
-      <a href="javascript:void(0)" class="d-block">{{ request.user.username }}</a>
+        <a href="javascript:void(0)" class="d-block"
+          >{{ request.user.username }}</a
+        >
       </div>
-   </div>
+    </div>
 
-   <!-- Sidebar Menu -->
-   <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-      <li class="nav-item">
-         <a href="{% url 'ecr:ecr_eventos' facilidad_id %}" class="nav-link {% if section == 'Libro de Guardia' %}active{% endif %}">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        <li class="nav-item">
+          <a
+            href="{% url 'ecr:ecr_eventos' facilidad_id %}"
+            class="nav-link {% if section == 'Libro de Guardia' %}active{% endif %}"
+          >
             <i class="nav-icon fas fa-book"></i>
-            <p>
-            Libro de Guardia
-            </p>
-         </a>
-      </li>
-     <!-- <li class="nav-item">
+            <p>Libro de Guardia</p>
+          </a>
+        </li>
+        <!-- <li class="nav-item">
          <a href="javascript:void(0);" class="nav-link {% if section == 'Comunicaciones' %}active{% endif %}">
             <i class="nav-icon fas fa-broadcast-tower"></i>
             <p>
@@ -42,15 +53,16 @@
             </p>
          </a>
       </li>-->
-      <li class="nav-item">
-         <a href="{% url 'ecr:ecr_index' facilidad_id %}" class="nav-link {% if section == 'Logistica' %}active{% endif %}">
+        <li class="nav-item">
+          <a
+            href="{% url 'ecr:ecr_index' facilidad_id %}"
+            class="nav-link {% if section == 'Logistica' %}active{% endif %}"
+          >
             <i class="nav-icon <i fas fa-truck"></i>
-            <p>
-            Logistica
-            </p>
-         </a>
-      </li>
-     <!-- <li class="nav-item">
+            <p>Logistica</p>
+          </a>
+        </li>
+        <!-- <li class="nav-item">
          <a href="#" class="nav-link {% if section == 'Turnos y Servicios' %}active{% endif %}">
             <i class="nav-icon far fa-clock"></i>
             <p>
@@ -58,25 +70,27 @@
             </p>
          </a>
       </li>-->
-      <li class="nav-item">
-         <a href="{% url 'ecr:ecr_sensor' facilidad_id %}" class="nav-link {% if section == 'Sensores' %}active{% endif %}">
+        <li class="nav-item">
+          <a
+            href="{% url 'ecr:ecr_sensor' facilidad_id %}"
+            class="nav-link {% if section == 'Sensores' %}active{% endif %}"
+          >
             <i class="nav-icon fas fa-hdd"></i>
-            <p>
-            Sensores
-            </p>
-         </a>
-      </li>
-      <li class="nav-item">
-         <a href="{% url 'users:personal_section' facilidad_id %}" class="nav-link {% if section == 'Personal' %}active{% endif %}">
+            <p>Sensores</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="{% url 'users:personal_section' facilidad_id %}"
+            class="nav-link {% if section == 'Personal' %}active{% endif %}"
+          >
             <i class="nav-icon fas fa-address-book"></i>
-            <p>
-            Personal
-            </p>
-         </a>
-      </li>
+            <p>Personal</p>
+          </a>
+        </li>
       </ul>
-   </nav>
-   <!-- /.sidebar-menu -->
-</div>
-<!-- /.sidebar -->
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
 </aside>

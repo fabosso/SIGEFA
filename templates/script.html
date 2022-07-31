@@ -1,7 +1,5 @@
 {% load static %}
 
-
-
 <!-- jQuery -->
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -19,18 +17,15 @@
 <script src="{% static 'plugins/sweetalert2-9.10.0/sweetalert2.min.js' %}"></script>
 
 {% block extra_javascript %}
-   <script src="{% static 'js/apps/ecr/logistica.js' %}"></script>
-   <script src="{% static 'js/apps/ecr/eventos_form.js' %}"></script>
-   <script>
+<script src="{% static 'js/apps/ecr/logistica.js' %}"></script>
+<script src="{% static 'js/apps/ecr/eventos_form.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    var userFirstName = "{{ request.user.first_name }}";
+    var userLastName = "{{ request.user.last_name }}";
 
-      $(document).ready(function(){
-         var userFirstName = "{{ request.user.first_name }}"
-         var userLastName = "{{ request.user.last_name }}"
-
-         var intials = userFirstName.charAt(0) + userLastName.charAt(0)
-         var profileImage = $('#profileImage').text(intials);
-      });
-
-   </script>
+    var intials = userFirstName.charAt(0) + userLastName.charAt(0);
+    var profileImage = $("#profileImage").text(intials);
+  });
+</script>
 {% endblock extra_javascript %}
-
