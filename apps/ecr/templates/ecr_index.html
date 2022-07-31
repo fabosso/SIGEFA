@@ -3,23 +3,23 @@
 <div class="col-lg-12 mb-2" style="text-align: center">
   <h2>{{ facilidad_name }}</h2>
 </div>
-<div class="col-lg-3 col-6">
+<div class="col-lg-4 col-6">
   <p class="d-none" id="id_facilidad">{{ facilidad_id }}</p>
   <div class="small-box dashboard-box bg-info">
     <div class="inner">
-      <h3>Vehiculo</h3>
+      <h3>Vehículo</h3>
       <p>Tipo: {{ vehiculo.nombre_vehiculo }}</p>
       <p>Marca: {{ vehiculo.marca_vehiculo }}</p>
       <p>Modelo: {{ vehiculo.modelo_vehiculo }}</p>
       <p>NI: 20514</p>
-      <p>Combustible: {{ vehiculo.cant_combustible_vehiculo }} l</p>
+      <p>Combustible: {{ vehiculo.cant_combustible_vehiculo }} L</p>
     </div>
     <div class="icon">
       <i class="fas fa-car"></i>
     </div>
   </div>
 </div>
-<div class="col-lg-3 col-6">
+<div class="col-lg-4 col-6">
   <div class="small-box dashboard-box bg-success">
     <div class="inner">
       <h3>Equipos</h3>
@@ -32,10 +32,10 @@
     </div>
   </div>
 </div>
-<div class="col-lg-3 col-6">
+<div class="col-lg-4 col-6">
   <div class="small-box dashboard-box bg-warning">
     <div class="inner">
-      <h3>Grupo Electrogeno</h3>
+      <h3>Grupo Electrógeno</h3>
       <p>Tipo: {{ gpoelectr.nombre_gpo_elect }}</p>
       <p>Marca: {{ gpoelectr.marca_gpo_elect }}</p>
       <p>Modelo {{ gpoelectr.modelo_gpo_elect }}</p>
@@ -46,6 +46,7 @@
     </div>
   </div>
 </div>
+<!--
 <div class="col-lg-3 col-6">
   <form action="." method="POST" id="CombustForm">
     <div class="form-group mb-5">
@@ -68,7 +69,9 @@
     </div>
   </form>
 </div>
+-->
 <script>
   var section = "{{ section }}";
 </script>
+
 {% endblock module_content %} {% block extra_javascript %} {% endblock extra_javascript %}
