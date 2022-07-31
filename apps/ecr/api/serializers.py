@@ -55,7 +55,7 @@ class CombustibleGpoElectrSerializer(serializers.ModelSerializer):
 
 
 class EstadoAlistamientoSerializer(serializers.ModelSerializer):
-    status = serializers.CharField(source='get_status_display')
+    # status = serializers.CharField(source='get_status_display')
 
     class Meta:
         model = EstadoAlistamiento
@@ -67,7 +67,8 @@ class EstadoAlistamientoSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(EstadoAlistamientoSerializer, self).to_representation(instance)
-        representation['fecha'] = instance.fecha.strftime('%d/%m/%Y, %H:%M:%S %p')
+        if hasattr(instance, 'fecha'):
+            representation['fecha'] = instance.fecha.strftime('%d/%m/%Y, %H:%M:%S %p')
         return representation
 
 

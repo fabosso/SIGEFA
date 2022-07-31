@@ -1,10 +1,9 @@
-import json
 from django.db import connection
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from rest_framework import generics, permissions
 from rest_framework import renderers
 from rest_framework import status
@@ -67,7 +66,15 @@ class FacilidadAPIStatusView(APIView):
       estado_instance = facilidad.estados_alistamiento.first()
       data = EstadoAlistamientoSerializer(estado_instance).data
       return Response(data)
-
+   
+   def post(self, request, pk):
+      facilidad = get_object_or_404(Facilidad, pk=pk)
+      estado_instance = facilidad.estados_alistamiento.first()
+      serializer = EstadoAlistamientoSerializer(estado_instance, data=request.data)
+      if serializer.is_valid():
+         serializer.save()
+         return Response(serializer.data)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class VehiculoAPICantCombus(APIView):
 
