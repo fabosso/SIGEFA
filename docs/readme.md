@@ -1,5 +1,7 @@
-## Levantar servidor
+## Activar entorno virtual de Python
+    .\venv\Scripts\activate.bat
 
+## Levantar servidor
     .\manage.py runserver
 
 ## Credenciales 
