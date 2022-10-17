@@ -1,11 +1,27 @@
 var id_facilidad = $("#id_facilidad").text();
 var id_sensor = $("#id_sensor").text();
 
-function create_sensor_card(data) {
+function obtain_title(line) {
+  const index = line.indexOf("(");
+  return line.substring(0, index);
+}
+
+function obtain_unit(line) {
+  const index = line.indexOf("(");
+  return line.substring(index + 1, index + 2);
+}
+
+function obtain_value(line) {
+  const index = line.indexOf(")");
+  return line.substring(index + 1).trim();
+}
+
+function create_sensor_card(nombre, valor) {
+  
   card = `<div class="row justify-content-center text-center">`;
   card += `<div class="col-md-6 mb-3">`;
-  card += `<h4>${data.nombre}</h4>`;
-  card += `<p>${data.indicador}</p>`;
+  card += `<h4>${nombre}</h4>`;
+  card += `<p>${valor}</p>`;
   card += `</div></div>`;
 
   return card;
@@ -29,9 +45,12 @@ if (sensor_created == "True") {
       method: "GET",
     })
       .done((data) => {
-        console.log(data);
+        const title = obtain_title(data.nombre);
+        const unit = obtain_unit(data.nombre);
+        const value = data.indicador;
+        const valor = unit === "°" ? `${value} ${unit}C` : `${value} ${unit}`;
         $(classToChange).html("");
-        card = create_sensor_card(data);
+        const card = create_sensor_card(title, valor);
         $(classToChange).append(card);
       })
       .fail((jqXHR, textStatus, errorThrown) => {
@@ -81,4 +100,34 @@ $(document).on("click", ".add-sensor", function (e) {
       }
     },
   });
+});
+
+$(document).ready(function(){
+  window.setInterval(function() {
+    var path = window.location.protocol + "//" + window.location.host + "/";
+    var id_facilidad = $("#id_facilidad").text();
+    const sensores = [1, 2, 3, 6];
+    sensores.forEach((sensor) => {
+      url = path + `api/facilidad/${id_facilidad}/sensor/${sensor}/edit/`;
+      $.ajax({
+        url: url,
+        method: "GET",
+        success: function (response) {
+          const classToChange = `.card-sensor-${sensor}`;
+          const line = $(classToChange).text();
+          const lines = line.split(" ");
+          const title = lines[0] + " ";
+          let valor;
+          if (lines[2]) {
+            valor = response.indicador + " " + lines[2];
+          } else {
+            valor = response.indicador;
+          }
+          $(classToChange).html("");
+          const card = create_sensor_card(title, valor);
+          $(classToChange).append(card);
+        }
+      })
+    });
+  }, 2000);
 });
