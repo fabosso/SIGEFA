@@ -1,5 +1,10 @@
 var select_subtipo = $('select[name="subtipo"]');
 
+
+window.lastStatus = {};
+lastStatus.value = "";
+
+
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -14,6 +19,40 @@ function getCookie(name) {
     }
   }
   return cookieValue;
+}
+
+function change_color(status_to_change) {
+  if (status_to_change == "S") {
+    $("button[name='L']")
+      .removeClass("btn-warning")
+      .addClass("btn-secondary");
+    $("button[name='F']")
+      .removeClass("btn-danger")
+      .addClass("btn-secondary");
+    $("button[name=" + status_to_change + "]").addClass(
+      "btn-success"
+    );
+  } else if (status_to_change == "L") {
+    $("button[name='S']")
+      .removeClass("btn-success")
+      .addClass("btn-secondary");
+    $("button[name='F']")
+      .removeClass("btn-danger")
+      .addClass("btn-secondary");
+    $("button[name=" + status_to_change + "]").addClass(
+      "btn-warning"
+    );
+  } else {
+    $("button[name='S']")
+      .removeClass("btn-success")
+      .addClass("btn-secondary");
+    $("button[name='L']")
+      .removeClass("btn-warning")
+      .addClass("btn-secondary");
+    $("button[name=" + status_to_change + "]").addClass(
+      "btn-danger"
+    );
+  }
 }
 const csrftoken = getCookie("csrftoken");
 
@@ -144,38 +183,9 @@ $(".status-btn").on("click", function (e) {
                 showConfirmButton: false,
                 timer: 5500,
               });
+              
+              change_color(status_to_change);
 
-              if (status_to_change == "S") {
-                $("button[name='L']")
-                  .removeClass("btn-warning")
-                  .addClass("btn-secondary");
-                $("button[name='F']")
-                  .removeClass("btn-danger")
-                  .addClass("btn-secondary");
-                $("button[name=" + status_to_change + "]").addClass(
-                  "btn-success"
-                );
-              } else if (status_to_change == "L") {
-                $("button[name='S']")
-                  .removeClass("btn-success")
-                  .addClass("btn-secondary");
-                $("button[name='F']")
-                  .removeClass("btn-danger")
-                  .addClass("btn-secondary");
-                $("button[name=" + status_to_change + "]").addClass(
-                  "btn-warning"
-                );
-              } else {
-                $("button[name='S']")
-                  .removeClass("btn-success")
-                  .addClass("btn-secondary");
-                $("button[name='L']")
-                  .removeClass("btn-warning")
-                  .addClass("btn-secondary");
-                $("button[name=" + status_to_change + "]").addClass(
-                  "btn-danger"
-                );
-              }
             },
             error: function (response) {
               Swal.fire({
@@ -191,4 +201,23 @@ $(".status-btn").on("click", function (e) {
       Cancelar: function () {},
     },
   });
+});
+
+$(document).ready(function(){
+  window.setInterval(function() {
+    var path = window.location.protocol + "//" + window.location.host + "/";
+    var id_facilidad = $("#id_facilidad").text();
+    var url_status = path + "api/facilidad/" + id_facilidad + "/status";
+    $.ajax({
+      type: "GET",
+      url: url_status,
+      success: function (response) {
+        if (lastStatus.value !== response.status) {
+          console.log("forcing new color");
+          lastStatus.value = response.status;
+          change_color(response.status)
+        }
+      }
+    });
+  }, 1000);
 });
