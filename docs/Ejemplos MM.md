@@ -17,7 +17,7 @@ MENSAJE: xxx
  - Subtipo: Saliente
  - Descripción:
  ```
-ORIGEN: Red Mat Pers
+DESTINO: Red Mat Pers
 CLASIFICACION: publico
 PRECEDENCIA: rutina
 EVENTO: generado
