@@ -1,9 +1,14 @@
 ## Activar entorno virtual de Python
-    .\venv\Scripts\activate.bat
+```
+.\venv\Scripts\activate.bat
+```
 
 ## Levantar servidor
-    .\manage.py runserver
+```
+.\manage.py runserver
+```
 
-## Credenciales 
-    Usuario: admin
-    Contraseña: admin
+## Credenciales
+
+- Usuario: admin
+- Contraseña: admin
