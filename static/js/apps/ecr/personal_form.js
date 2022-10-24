@@ -55,7 +55,7 @@ $(".add-personal-button").on("click", function (e) {
           }
         }
       } else if (data.status == 500) {
-        console.log(data);
+        //console.log(data);
       }
     })
     .fail(function (jqXHR, textStatus, errorThrown) {

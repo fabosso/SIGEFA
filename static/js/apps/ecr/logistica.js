@@ -17,15 +17,15 @@ $(document).on("input", ".slider-range", function () {
       data: parameters,
       success: function (response) {
         if (response.status == 200) {
-          console.log(response);
-          console.log("200");
+          //console.log(response);
+          //console.log("200");
         } else {
-          console.log(response);
-          console.log("Error");
+          //console.log(response);
+          //console.log("Error");
         }
       },
       error: function (response) {
-        console.log(response);
+        //console.log(response);
       },
     });
   }, timeoutVal);

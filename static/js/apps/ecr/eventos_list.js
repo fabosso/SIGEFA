@@ -130,7 +130,7 @@ function get_datatable(url) {
     method: "GET",
   })
     .done(function (data) {
-      console.log(data);
+      // console.log(data);
       $("#hidden-spinner").hide();
       current_page = parseInt(data.links.current);
       putTableData(data);

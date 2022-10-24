@@ -148,7 +148,7 @@ $(document).ready(function () {
             i++
           ) {
             err_obj = JSON.parse(errors_array[i]);
-            console.log(err_obj);
+            // console.log(err_obj);
             for (var name in err_obj) {
               for (var j in err_obj[name]) {
                 var $input = $("input[name=" + name + "]");
@@ -167,7 +167,7 @@ $(document).ready(function () {
             }
           }
         } else if (response.status == 500) {
-          console.log(response);
+          // console.log(response);
         }
       },
       error: function (response) {
