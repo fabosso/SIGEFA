@@ -3,6 +3,50 @@ var select_subtipo = $('select[name="subtipo"]');
 window.lastStatus = {};
 lastStatus.value = "";
 
+const diccionario = {
+  clasificaciones: {
+    0: "publico",
+    1: "publico",
+    2: "reservado",
+    3: "confidencial",
+    4: "secreto",
+  },
+  precedencias: {
+    0: "rutina",
+    1: "rutina",
+    2: "prioridad",
+    3: "inmediato",
+    4: "flash",
+  },
+  redes: {
+    0: "Red Cdo Op",
+    1:  "Red Cdo Op",
+    2:  "Red Mat Pers",
+    3:  "Red Cdo",
+    4:  "Red Op",
+  },
+
+}
+
+function descriptionMiddleware(formData) {
+  if (formData.tipo !== "1") {
+    return formData.description;
+  }
+  let newDescription = "";
+  if (formData.subtipo !== "2") {
+    newDescription = "ORIGEN: ";
+  } else {
+    newDescription = "DESTINO: ";
+  }
+  newDescription += diccionario.redes[formData.origen_destino] + "\n";
+  newDescription += `CLASIFICACION: ${diccionario.clasificaciones[formData.clasificacion]}\n`;
+  newDescription += `PRECEDENCIA: ${diccionario.precedencias[formData.precedencia]}\n`;
+  newDescription += `EVENTO: transmitido\n`;
+  newDescription += `MENSAJE: ${formData.description}\n`;
+  newDescription += formData.cifrado === "1" ? "CIFRADO\n" : "";
+  return newDescription;
+}
+
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -90,6 +134,16 @@ $(".post-evento-button").on("click", function (e) {
   var id_facilidad = $("#id_facilidad").text();
 
   url = path + `${id_facilidad}/eventos`;
+
+  let formData = {};
+  for (const pair of event_form_data.entries()) {
+    formData[pair[0]] = pair[1];
+  }
+
+  event_form_data.set("description", descriptionMiddleware(formData));
+  for (const pair of event_form_data.entries()) {
+    console.log(`${pair[0]}, ${pair[1]}`);
+  }
 
   $.ajax({
     url: url,
