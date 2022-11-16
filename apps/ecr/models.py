@@ -37,6 +37,30 @@ class SubTipoEvento(models.Model):
    def __str__(self):
       return self.nombre_sub_tipo
 
+class OrigenDestinoEvento(models.Model):
+   nombre_tipe = models.CharField(max_length=50)
+
+   def __str__(self):
+      return self.nombre_tipe
+
+class ClasificacionEvento(models.Model):
+   nombre_tipe = models.CharField(max_length=50)
+
+   def __str__(self):
+      return self.nombre_tipe
+
+class PrecedenciaEvento(models.Model):
+   nombre_tipe = models.CharField(max_length=50)
+
+   def __str__(self):
+      return self.nombre_tipe
+
+class CifradoEvento(models.Model):
+   nombre_tipe = models.CharField(max_length=50)
+
+   def __str__(self):
+      return self.nombre_tipe
+
 
 class BaseModelComunicaciones(models.Model):
    nombre = models.CharField(max_length=50)
@@ -88,6 +112,10 @@ class Evento(models.Model):
    description = models.TextField()
    tipo = models.ForeignKey(TipoEvento, on_delete=models.CASCADE, related_name='eventos_por_tipos')
    subtipo = models.ForeignKey(SubTipoEvento, on_delete=models.CASCADE, related_name='eventos_por_subtipos')
+   origen_destino = models.ForeignKey(OrigenDestinoEvento, on_delete=models.CASCADE)
+   clasificacion = models.ForeignKey(ClasificacionEvento, on_delete=models.CASCADE)
+   precedencia = models.ForeignKey(PrecedenciaEvento, on_delete=models.CASCADE)
+   cifrado = models.ForeignKey(CifradoEvento, on_delete=models.CASCADE)
    timestamp = models.DateTimeField(auto_now_add=True)
 
    facilidad = models.ForeignKey(Facilidad, on_delete=models.CASCADE, related_name='eventos')

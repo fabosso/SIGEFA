@@ -6,7 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import (
    ECR, Corresponsal, EqCom,
    Vehiculo, GpoElectr, Evento,
-   TipoEvento, SubTipoEvento, Sensor
+   TipoEvento, SubTipoEvento, Sensor,
+   OrigenDestinoEvento, ClasificacionEvento, PrecedenciaEvento, CifradoEvento
 )
 
 User = get_user_model()
@@ -48,7 +49,6 @@ class ComunicacionesForm(forms.Form):
       empty_label=None,  
       required=True)
 
-
 class VehiculoForm(forms.ModelForm):
    nombre_vehiculo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="Nombre:", required=True)
    cant_combustible_vehiculo = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'min': '0'}), label="Cant Combustible:", required=True)
@@ -79,9 +79,6 @@ class VehiculoForm(forms.ModelForm):
          'modelo_vehiculo',
       )
       exclude = ('tipo_combustible',)
-
-      
-
 
 class GpoElectForm(forms.ModelForm):
    nombre_gpo_elect = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="Nombre:", required=True)
@@ -114,7 +111,6 @@ class GpoElectForm(forms.ModelForm):
       )
       exclude = ('tipo_combustible',)
       
-
 class LogisticaEqComForm(forms.ModelForm):
 
 
@@ -131,10 +127,7 @@ class LogisticaEqComForm(forms.ModelForm):
          "nombre": "Equipo Com"
       }
 
-
-
 LogisticaEqComFormset = formset_factory(LogisticaEqComForm, extra=1)
-
 
 class CombusVehiculo(forms.ModelForm):
 
@@ -174,8 +167,6 @@ class CombusVehiculo(forms.ModelForm):
          'cap_combustible_gpo_elect',
       )
 
-
-
 class CombusGpoElect(forms.ModelForm):
 
    cant_combustible_gpo_elect = forms.IntegerField(
@@ -214,7 +205,6 @@ class CombusGpoElect(forms.ModelForm):
          'cap_combustible_gpo_elect',
       )
 
-
 class EventoForm(forms.ModelForm):
    tipo = forms.ModelChoiceField(
       queryset=TipoEvento.objects.all().prefetch_related('subtipos'), 
@@ -225,6 +215,29 @@ class EventoForm(forms.ModelForm):
       queryset=SubTipoEvento.objects.all().select_related('tipo'), 
       widget=forms.Select(attrs={'class': 'form-control select2'}),
       label='Subtipo:',)
+
+   origen_destino = forms.ModelChoiceField(
+      queryset=OrigenDestinoEvento.objects.all(), 
+      widget=forms.Select(attrs={'class': 'form-control select2'}),
+      label='Origen/Destino:',)
+
+   clasificacion = forms.ModelChoiceField(
+      queryset=ClasificacionEvento.objects.all(), 
+      widget=forms.Select(attrs={'class': 'form-control select2'}),
+      label='Clasificación:',)
+   
+   precedencia = forms.ModelChoiceField(
+      queryset=PrecedenciaEvento.objects.all(), 
+      widget=forms.Select(attrs={'class': 'form-control select2'}),
+      label='Precedencia:',)
+
+   cifrado = forms.ModelChoiceField(
+      queryset=CifradoEvento.objects.all(), 
+      widget=forms.Select(attrs={'class': 'form-control select2'}),
+      label='Cifrado:',)
+
+   
+
 
    description = forms.CharField(
       widget=forms.Textarea(attrs={'class': 'form-control', 'rows': "4"}),
@@ -237,6 +250,10 @@ class EventoForm(forms.ModelForm):
          'description',
          'tipo',
          'subtipo',
+         'origen_destino',
+         'clasificacion',
+         'precedencia',
+         'cifrado'
       )
 
 
